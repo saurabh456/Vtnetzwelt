@@ -23,14 +23,14 @@ public class Waits {
 	//static WebDriverWait wait = null;
 	
 	static Wait<WebDriver> wait;
-	static Boolean elementVisible;
-	static Long jqueryStatus;
+	static boolean elementVisible;
+	static long jqueryStatus;
 	static int pageTimeout;
 	static String pageLoadStatus;
 	
 	static JavascriptExecutor js;
 
-public static Boolean explicitWait(WebDriver driver, WebElement element, int Timeout)
+public static boolean explicitWait(WebDriver driver, WebElement element, int Timeout)
 {
 	
 	wait = new FluentWait<WebDriver>(driver)

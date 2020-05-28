@@ -31,7 +31,9 @@ public class BrowserFactory {
 	
 	public WebDriver getDriver()
 	{
-		driver = createDriver();
+		if(driver==null)
+			driver = createDriver();
+		
 		return driver;
 	}
 	

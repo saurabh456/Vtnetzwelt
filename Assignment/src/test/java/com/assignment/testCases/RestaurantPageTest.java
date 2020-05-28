@@ -23,6 +23,7 @@ import static org.testng.Assert.assertTrue;
 import java.io.IOException;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -54,20 +55,22 @@ public class RestaurantPageTest {
 	@Test(priority = 0, description = "Test Case to open 'Last Near-by Restaurant in a new tab")
 	public void PopularRestaurantsTest()
 	{
-		pageObjectManager = new PageObjectManager(driver);
-		restaurantPage = pageObjectManager.getRestaurantPage();
 		
 		ExtentReportManager.extentTest=ExtentReportManager.extentReporter.createTest("PopularRestaurantsTest TestCase Execution Started");
 
 		try {
-			restaurantPage.setAddress();
-		} catch (InterruptedException e) 
+			
+			pageObjectManager.getInstance().getRestaurantPage().setAddress();
+		} 
+		catch (InterruptedException e) 
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		restaurantDetailsPage = restaurantPage.locateLastRestaurant();
+		restaurantDetailsPage = pageObjectManager.getInstance().getRestaurantPage().locateLastRestaurant();
+		
+		Assert.assertNotNull(restaurantDetailsPage, "Restaurant Details Page fails to load");
 		
 		System.out.println("Successfully clicked the last Restaurant");
 		ExtentReportManager.extentTest.log(Status.INFO, "Successfully opened the last Restaurant details");
@@ -90,13 +93,13 @@ public class RestaurantPageTest {
 		SoftAssert softAssert = new SoftAssert();
 		ExtentReportManager.extentTest=ExtentReportManager.extentReporter.createTest("AvailableRestaurantsTest TestCase Execution Started");
 		
-		restaurantPage.saveAvailableRestaurants();
+		pageObjectManager.getInstance().getRestaurantPage().saveAvailableRestaurants();
 		ExtentReportManager.extentTest.info("Successfully saved list of Available Restaurants in excel");
 		
-		Boolean duplicateRestaurantsFlag = restaurantPage.verifyDuplicacyOfAvailableRestaurants();
-		
-		softAssert.assertEquals(duplicateRestaurantsFlag, false,"Duplicate restaurants appears in the list of Restaurants.");
+		boolean duplicateRestaurantsFlag = pageObjectManager.getInstance().getRestaurantPage().verifyDuplicacyOfAvailableRestaurants();
 
+		softAssert.assertEquals(duplicateRestaurantsFlag, false, "Duplicate restaurants appears in the list of Restaurants.");
+		
 		if(duplicateRestaurantsFlag)
 			ExtentReportManager.extentTest.log(Status.INFO, "Duplicate Restaurants appears in the list of Available Restaurants");
 		else
@@ -120,7 +123,7 @@ public class RestaurantPageTest {
 		  ExtentReportManager.extentTest.log(Status.FAIL, MarkupHelper.createLabel(result.getName()+" TestCase got Failed", ExtentColor.RED));
 		  
 		  ExtentReportManager.extentTest.log(Status.FAIL, MarkupHelper.createLabel(result.getThrowable()+" TestCase got Failed", ExtentColor.RED));
-		 
+
 		  String screenshotDirectoryPath = TestUtilities.captureScreenshot(driver, result.getName());
 		  
 		  try 

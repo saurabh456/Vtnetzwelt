@@ -7,13 +7,23 @@ import com.assignment.pageObjects.RestaurantPage;
 
 public class PageObjectManager {
 	
+	private static PageObjectManager pageObjectManager = null;
+	
 	WebDriver driver = null;
 	RestaurantPage restaurantPage = null;
 	RestaurantDetailsPage restaurantDetailsPage = null;
 	
-	public PageObjectManager(WebDriver driver)
+	private PageObjectManager()
 	{
-		this.driver = driver;
+		driver = BrowserFactory.getInstance().getDriver();
+	}
+	
+	public static PageObjectManager getInstance()
+	{
+		if(pageObjectManager==null)
+			pageObjectManager = new PageObjectManager();
+		
+		return pageObjectManager;
 	}
 	
 	public RestaurantPage getRestaurantPage()

@@ -14,7 +14,7 @@ public class RestaurantDetailsPage {
 
 	WebDriver driver = null;
 	Actions actions= null;
-	Boolean pageLoadStatus=false;
+	boolean pageLoadStatus=false;
 	
 	public RestaurantDetailsPage(WebDriver driver)
 	{

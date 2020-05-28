@@ -65,11 +65,11 @@ public class TestUtilities
 	}
 	
 	
-	public static Boolean restaurantsDuplicacyVerification(WebDriver driver)
+	public static boolean restaurantsDuplicacyVerification(WebDriver driver)
 	{
 		    js = ((JavascriptExecutor)driver);
-			Boolean flag = false;
-			Boolean limitReachedFlag = false;
+			boolean flag = false;
+			boolean limitReachedFlag = false;
 		
 			long pageHeight=(long)js.executeScript("return window.innerHeight");
 			

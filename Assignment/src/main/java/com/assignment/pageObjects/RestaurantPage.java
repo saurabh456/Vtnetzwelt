@@ -13,6 +13,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.LoadableComponent;
 
 import com.assignment.resourceManager.CommonTestData;
 import com.assignment.resourceManager.ConfigurationReader;
@@ -24,9 +25,8 @@ public class RestaurantPage {
 
 	WebDriver driver;
 	Actions actions;
-	Boolean pageLoadStatus=false;
+	boolean pageLoadStatus=false;
 	public static List<String> restaurantList=null;
-	
 	
 	public RestaurantPage(WebDriver driver)
 	{
